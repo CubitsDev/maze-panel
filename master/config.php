@@ -10,7 +10,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$allowedGroups = array('62', '4');
+$allowedGroups = array('4', '29', '62', '60', '7', '57', '9', '63', '53', '34', '11');
 
 /*$groupNames = array(
   array("Owner", 4)

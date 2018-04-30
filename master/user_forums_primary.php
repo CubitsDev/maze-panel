@@ -58,9 +58,14 @@ if ($identity == "0") {
   header("location: user_forums.php?invalidID=1");
 }
 
+$sql67 = "SELECT member_group_id FROM core_members WHERE member_id = ".$identity.";";
+$result67 = mysqli_query($conn, $sql67);
+$row67 = mysqli_fetch_array($result67);
+
+
 $userExecute = htmlspecialchars($_SESSION['username']);
 
-if (in_array($identity, $cannotbeModified)) {
+if (in_array($row67['member_group_id'], $cannotbeModified)) {
 
 header("location: user_forums.php?noPermission=1");
 

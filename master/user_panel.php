@@ -124,6 +124,17 @@ header("location: welcome.php");
                            <li><a  href="user_forums.php">Forums</a></li>
                        </ul>
                    </li>
+
+                   <li class="sub-menu">
+                       <a href="javascript:;" >
+                           <i class="fa fa-life-ring"></i>
+                           <span>Support Area</span>
+                       </a>
+                       <ul class="sub">
+                           <li><a href="support_make_civ.php">Make Civ</a></li>
+                           <li><a href="support_name_change.php">Name Change</a></li>
+                       </ul>
+                   </li>
                </ul>
                <!-- sidebar menu end-->
            </div>
@@ -178,10 +189,10 @@ header("location: welcome.php");
 
        <!--main content end-->
        <!--footer start-->
-       <footer class="site-footer">
+       <footer class="site-footer" style="background: #424a5d;">
            <div class="text-center">
-               2014 - Alvarez.is
-               <a href="blank.html#" class="go-top">
+               Made with <i class="fa fa-heart" style="color: red;"></i> By <a href="https://tomroman.co.uk">Tom</a>
+               <a href="#" class="go-top">
                    <i class="fa fa-angle-up"></i>
                </a>
            </div>

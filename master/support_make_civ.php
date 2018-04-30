@@ -65,7 +65,6 @@ if(isset($_GET["successful"])) {
 }
 
  ?>
-
  <!DOCTYPE html>
  <html lang="en">
    <head>
@@ -139,24 +138,24 @@ if(isset($_GET["successful"])) {
                    </li>
 
                    <li class="sub-menu">
-                       <a class="active" href="javascript:;" >
+                       <a href="javascript:;" >
                            <i class="fa fa-desktop"></i>
                            <span>Users</span>
                        </a>
                        <ul class="sub">
                            <li><a  href="user_panel.php">Panel</a></li>
                            <li><a  href="user_game.php">Game</a></li>
-                           <li class="active"><a  href="user_forums.php">Forums</a></li>
+                           <li><a  href="user_forums.php">Forums</a></li>
                        </ul>
                    </li>
 
                    <li class="sub-menu">
-                       <a href="javascript:;" >
+                       <a class="active" href="javascript:;" >
                            <i class="fa fa-life-ring"></i>
                            <span>Support Area</span>
                        </a>
                        <ul class="sub">
-                           <li><a href="support_make_civ.php">Make Civ</a></li>
+                           <li class="active"><a href="support_make_civ.php">Make Civ</a></li>
                            <li><a href="support_name_change.php">Name Change</a></li>
                        </ul>
                    </li>
@@ -172,10 +171,9 @@ if(isset($_GET["successful"])) {
        <!--main content start-->
        <section id="main-content">
            <section class="wrapper site-min-height">
-           	<h3><i class="fa fa-angle-right"></i> Forum Users</h3>
+           	<h3><i class="fa fa-angle-right"></i> Make Civ</h3>
            	<div class="row mt">
               <?php
-                if ($identity == 0) {
                   if ($invalidIDShow == "1") { ?>
                     <div class="alert alert-danger" role="alert">
                       Forum ID Was Invalid!
@@ -185,96 +183,32 @@ if(isset($_GET["successful"])) {
                   <div class="alert alert-danger" role="alert">
                     You do not have Permission to edit this user!
                   </div>
-              <?php  }
-               ?>
-               <div class="col-lg-12">
-                 <div class="form-panel">
-              <h4 class="mb"><i class="fa fa-angle-right"></i> Forum User Info</h4>
-              <form class="form-inline" role="form" method="get" action="https://mazerp.com/panel/user_forums.php">
-                <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label">User ID</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="id" placeholder="Enter forum ID">
-                        <button type="submit" class="btn btn-theme">Submit</button>
-                    </div>
-              </form>
-        </div>
-                    </div>
-             <?php } else { ?>
-                       <div class="col-lg-12">
-                           <div class="form-panel">
-                             <?php
-                             if ($successShow == "1") { ?>
-                               <div class="alert alert-success" role="alert">
-                                 User Has Been Updated!
-                               </div>
-                           <?php  } ?>
-                           	  <h4 class="mb"><i class="fa fa-angle-right"></i> User Info</h4>
-                               <form class="form-horizontal style-form">
-                                   <div class="form-group">
-                                       <label class="col-sm-2 col-sm-2 control-label">User ID</label>
-                                       <div class="col-sm-10">
-                                           <input class="form-control" id="disabledInput" type="text" placeholder="<?php echo $identity; ?>" disabled="">
-                                       </div>
-                                       </div>
-                                       <?php
-                                       $sql10 = "SELECT name FROM core_members WHERE member_id = ".$identity.";";
-                                       $result10 = mysqli_query($conn, $sql10);
-                                       $row10 = mysqli_fetch_array($result10);
-                                        ?>
-                                        <div class="form-group">
-                                       <label class="col-sm-2 col-sm-2 control-label">Forum Name</label>
-                                       <div class="col-sm-10">
-                                           <input class="form-control" id="disabledInput" type="text" placeholder="<?php echo $row10['name']; ?>" disabled="">
-                                       </div>
-                                   </div>
-                                   <div class="form-group">
-                                     <label class="col-sm-2 col-sm-2 control-label">Primary Group</label>
-                                     <div class="col-sm-10">
-                                       <?php
-                                       $query = "SELECT member_group_id FROM core_members WHERE member_id = ".$identity.";";
-                                       $result = mysqli_query($conn,$query);
-                                       $row = mysqli_fetch_array($result);
-                                       $userGroupID = $row['member_group_id'];
-
-                                       $queryTwo = "SELECT * FROM core_sys_lang_words where word_key = 'core_group_".$userGroupID."';";
-                                       $resultTwo = mysqli_query($conn, $queryTwo);
-                                       $rowTwo = mysqli_fetch_array($resultTwo);
-                                        ?>
-                                        <input class="form-control" id="disabledInput" type="text" placeholder="<?php echo $rowTwo['word_default']; ?>" disabled="">
-                                      </div>
-                                   </div>
-                                </form>
+              <?php  } if ($successShow == "1") { ?>
+                <div class="alert alert-success" role="alert">
+                  Successfully made User a Civilian!
+                </div>
+            <?php  }
+             ?>
+          		<div class="col-lg-12">
+                  <div class="form-panel">
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Make Civilian</h4>
+                      <form class="form-horizontal style-form" method="get" action="https://mazerp.com/panel/support_make_civ_action.php">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">User ID</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" placeholder="User ID" name="id" required>
                               </div>
-                            </div>
-                            <?php if (!in_array($userGroupID, $cannotbeModified)) { ?>
-                              <div class="col-lg-12">
-                                  <div class="form-panel">
-                                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Update User</h4>
-                                      <form class="form-horizontal style-form" method="get" action="user_forums_primary.php">
-                                          <div class="form-group">
-                                            <label class="col-sm-2 col-sm-2 control-label">Primary Group</label>
-                                            <div class="col-sm-10">
-                                              <select name="gchange"class="form-control">
-                                  						  <option value="civ">Civilian</option>
-                                  						  <option value="pd">Police Department</option>
-                                  						  <option value="ems">EMS</option>
-                                  						  <option value="fd">Fire Department</option>
-                                  						  <option value="ss">Secret Service</option>
-                                                <option value="banned">Banned</option>
-                                                <option value="member">Member</option>
-                                  						</select>
-                                              <input name="id" type="hidden" value="<?php echo $identity; ?>">
-                                              <br>
-                                              <button type="submit" class="btn btn-theme" style="float: right;">Submit</button
-                                             </div>
-                                          </div>
-                                       </form>
-                                     </div>
-                                   </div>
-                          <?php  }  ?>
-
-                          <?php } ?>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Application URL</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" placeholder="Application URL" name="url" required>
+                              </div>
+                          </div>
+                          <button type="submit" class="btn btn-theme">Submit</button>
+                      </form>
+                  </div>
+          		</div><!-- col-lg-12-->
                   </div><!--/content-panel -->
               </div><!-- /col-md-12 -->
            	</div>

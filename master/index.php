@@ -68,66 +68,77 @@ header("location: welcome.php");
   <body>
 
   <section id="container" >
-      <!-- **********************************************************************************************************************************************************
-      TOP BAR CONTENT & NOTIFICATIONS
-      *********************************************************************************************************************************************************** -->
-      <!--header start-->
-      <header class="header black-bg">
-              <div class="sidebar-toggle-box">
-                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-              </div>
-            <!--logo start-->
-            <a href="index.php" class="logo"><b>MAZE PANEL</b></a>
-            <!--logo end-->
-            <div class="nav notify-row" id="top_menu">
-                <!--  notification start -->
-                <ul class="nav top-menu">
-                </ul>
-                <!--  notification end -->
+    <!-- **********************************************************************************************************************************************************
+    TOP BAR CONTENT & NOTIFICATIONS
+    *********************************************************************************************************************************************************** -->
+    <!--header start-->
+    <header class="header black-bg" style="background: #27292a;border-bottom: 1px solid #a94442;">
+            <div class="sidebar-toggle-box">
+                <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
             </div>
-            <div class="top-menu">
-              <ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="logout.php">Logout</a></li>
-            	</ul>
-            </div>
-        </header>
-      <!--header end-->
-
-      <!-- **********************************************************************************************************************************************************
-      MAIN SIDEBAR MENU
-      *********************************************************************************************************************************************************** -->
-      <!--sidebar start-->
-      <aside>
-          <div id="sidebar"  class="nav-collapse ">
-              <!-- sidebar menu start-->
-              <ul class="sidebar-menu" id="nav-accordion">
-
-                  <p class="centered"><img src="https://mazerp.com/forums/uploads/<?php echo htmlspecialchars($_SESSION['image']); ?>"></p>
-                  <h5 class="centered"><?php echo htmlspecialchars($_SESSION['username']); ?></h5>
-
-                  <li class="mt">
-                      <a href="index.php">
-                          <i class="fa fa-dashboard"></i>
-                          <span>Dashboard</span>
-                      </a>
-                  </li>
-
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-desktop"></i>
-                          <span>Users</span>
-                      </a>
-                      <ul class="sub">
-                        <li><a  href="user_panel.php">Panel</a></li>
-                          <li><a  href="user_game.php">Game</a></li>
-                          <li><a  href="user_forums.php">Forums</a></li>
-                      </ul>
-                  </li>
+          <!--logo start-->
+          <a href="index.php" class="logo"><b>MAZE PANEL</b></a>
+          <!--logo end-->
+          <div class="nav notify-row" id="top_menu">
+              <!--  notification start -->
+              <ul class="nav top-menu">
               </ul>
-              <!-- sidebar menu end-->
+              <!--  notification end -->
           </div>
-      </aside>
-      <!--sidebar end-->
+          <div class="top-menu">
+            <ul class="nav pull-right top-menu">
+                  <li><a href="logout.php" style="	color: #f2f2f2;font-size: 12px;border-radius: 4px;-webkit-border-radius: 4px;border: 1px solid #ffffff !important;padding: 5px 15px;margin-right: 15px;margin-top: 15px;">Logout</a></li>
+           </ul>
+          </div>
+      </header>
+    <!--header end-->
+
+    <!-- **********************************************************************************************************************************************************
+    MAIN SIDEBAR MENU
+    *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar"  class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu" id="nav-accordion">
+
+                <p class="centered"><img src="https://mazerp.com/forums/uploads/<?php echo htmlspecialchars($_SESSION['image']); ?>"></p>
+                <h5 class="centered"><?php echo htmlspecialchars($_SESSION['username']); ?></h5>
+
+                <li class="mt">
+                    <a href="index.php">
+                        <i class="fa fa-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;" >
+                        <i class="fa fa-desktop"></i>
+                        <span>Users</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="user_panel.php">Panel</a></li>
+                        <li><a  href="user_game.php">Game</a></li>
+                        <li><a  href="user_forums.php">Forums</a></li>
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;" >
+                        <i class="fa fa-life-ring"></i>
+                        <span>Support Area</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="support_make_civ.php">Make Civ</a></li>
+                        <li><a href="support_name_change.php">Name Change</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
 
       <!-- **********************************************************************************************************************************************************
       MAIN CONTENT
@@ -185,10 +196,10 @@ header("location: welcome.php");
 
       <!--main content end-->
       <!--footer start-->
-      <footer class="site-footer">
+      <footer class="site-footer" style="background: #424a5d;">
           <div class="text-center">
               Made with <i class="fa fa-heart" style="color: red;"></i> By <a href="https://tomroman.co.uk">Tom</a>
-              <a href="{pageurl="panel/panel-home"}#" class="go-top">
+              <a href="#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
