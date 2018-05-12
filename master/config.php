@@ -28,6 +28,9 @@ $allowedGroups = array('4', '29', '62', '60', '7', '57', '9', '63', '53', '34', 
 
 $cannotbeModified = array('4', '29', '62', '60', '7', '57', '9', '63', '53', '34', '11');
 
+$modAccessArea = array('4', '29', '62', '60', '7', '57', '9', '63');
+
+$noOneCanModify = array('4', '29', '62');
 
 $header_path = "header_side.php";
 
