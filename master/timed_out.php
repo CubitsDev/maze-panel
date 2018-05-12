@@ -22,7 +22,7 @@ session_destroy();
      <!-- Bootstrap core CSS -->
      <link href="https://mazerp.com/panel/assets/css/bootstrap.css" rel="stylesheet">
      <!--external css-->
-     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+     <link href="https://mazerp.com/panel/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
      <!-- Custom styles for this template -->
      <link href="https://mazerp.com/panel/assets/css/layout.css" rel="stylesheet">

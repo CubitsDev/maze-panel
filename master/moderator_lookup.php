@@ -64,6 +64,7 @@ if(isset($_GET["successful"])) {
   $successShow = "0";
 }
 
+
  ?>
  <!DOCTYPE html>
  <html lang="en">
@@ -78,7 +79,7 @@ if(isset($_GET["successful"])) {
      <link href="https://mazerp.com/panel/assets/css/bootstrap.css" rel="stylesheet">
      <link href="https://gmod.mazerp.com/forums/bluedog/bluedogtbl.css" rel="stylesheet">
      <!--external css-->
- <link href="https://mazerp.com/panel/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://mazerp.com/panel/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
      <!-- Custom styles for this template -->
      <link href="https://mazerp.com/panel/assets/css/layout.css" rel="stylesheet">
      <link href="https://mazerp.com/panel/assets/css/style-responsive.css" rel="stylesheet">
@@ -150,23 +151,23 @@ if(isset($_GET["successful"])) {
                    </li>
 
                    <li class="sub-menu">
-                       <a class="active" href="javascript:;" >
+                       <a href="javascript:;" >
                            <i class="fa fa-life-ring"></i>
                            <span>Support Area</span>
                        </a>
                        <ul class="sub">
-                           <li class="active"><a href="support_make_civ.php">Make Civ</a></li>
+                           <li><a href="support_make_civ.php">Make Civ</a></li>
                            <li><a href="support_name_change.php">Name Change</a></li>
                        </ul>
                    </li>
 
                    <li class="sub-menu">
-                       <a href="javascript:;" >
+                       <a class="active" href="javascript:;" >
                            <i class="fa fa-superpowers"></i>
                            <span>Moderator Area</span>
                        </a>
                        <ul class="sub">
-                           <li><a href="moderator_lookup.php">Player Lookup</a></li>
+                           <li class="active"><a href="moderator_lookup.php">Player Lookup</a></li>
                        </ul>
                    </li>
                </ul>
@@ -181,44 +182,65 @@ if(isset($_GET["successful"])) {
        <!--main content start-->
        <section id="main-content">
            <section class="wrapper site-min-height">
-           	<h3><i class="fa fa-angle-right"></i> Make Civ</h3>
+           	<h3><i class="fa fa-angle-right"></i> Player Identify</h3>
            	<div class="row mt">
               <?php
                   if ($invalidIDShow == "1") { ?>
                     <div class="alert alert-danger" role="alert">
-                      Forum ID Was Invalid!
+                      ID Was Not Valid
                     </div>
                 <?php  }
-                if ($noPermissionShow == "1") { ?>
-                  <div class="alert alert-danger" role="alert">
-                    You do not have Permission to edit this user!
-                  </div>
-              <?php  } if ($successShow == "1") { ?>
+                 if ($successShow == "1") { ?>
                 <div class="alert alert-success" role="alert">
-                  Successfully made User a Civilian!
+                  User Requested Is: <?php echo $_SESSION['modLookupResult']; ?>
                 </div>
-            <?php  }
-             ?>
-          		<div class="col-lg-12">
+            <?php
+          } $_SESSION['modLookupResult'] = "";
+          if (in_array($_SESSION['usergroup'], $modAccessArea) ) { ?>
+              <div class="col-lg-12">
                   <div class="form-panel">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Make Civilian</h4>
-                      <form class="form-horizontal style-form" method="get" action="https://mazerp.com/panel/support_make_civ_action.php">
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Identify User with Forum ID</h4>
+                      <form class="form-horizontal style-form" method="get" action="moderator_lookup_forum.php">
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">User ID</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Forum User ID</label>
                               <div class="col-sm-10">
                                   <input type="text" class="form-control" placeholder="User ID" name="id" required>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Application URL</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" placeholder="Application URL" name="url" required>
                               </div>
                           </div>
                           <button type="submit" class="btn btn-theme">Submit</button>
                       </form>
                   </div>
+                  <div class="form-panel">
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Identify User Via SteamID</h4>
+                      <form class="form-horizontal style-form" method="get" action="moderator_lookup_steam.php">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Steam 64 ID</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" placeholder="Steam ID" name="id" required>
+                              </div>
+                          </div>
+                          <button type="submit" class="btn btn-theme">Submit</button>
+                      </form>
+                  </div>
+                  <div class="form-panel">
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Identify User Via RP Name</h4>
+                      <form class="form-horizontal style-form" method="get">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Server Roleplay Name</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" placeholder="Server RP Name" name="id" required disabled>
+                              </div>
+                          </div>
+                          <button type="submit" class="btn btn-theme">Unavailable</button>
+                      </form>
+                  </div>
           		</div><!-- col-lg-12-->
+        <?php    } else {
+             ?>
+             <div class="col-lg-12">
+               <center><i class="fa fa-exclamation-triangle" aria-hidden="true" style="font-size: 32px;"></i><br><br>This is an Area for Moderator+ Only! If this is an error, please inform Tom!</center>
+             </div>
+            <?php } ?>
                   </div><!--/content-panel -->
               </div><!-- /col-md-12 -->
            	</div>
