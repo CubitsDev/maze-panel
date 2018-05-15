@@ -214,7 +214,7 @@ if(isset($_GET["successful"])) {
                   	  <h4 class="mb"><i class="fa fa-angle-right"></i> Identify User Via SteamID</h4>
                       <form class="form-horizontal style-form" method="get" action="moderator_lookup_steam.php">
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Steam 64 ID</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Steam 32 ID</label>
                               <div class="col-sm-10">
                                   <input type="text" class="form-control" placeholder="Steam ID" name="id" required>
                               </div>
