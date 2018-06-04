@@ -1,4 +1,5 @@
 <?php
+/* User will be banned via this route */
 session_start();
 
 require 'steamauth/steamauth.php';
