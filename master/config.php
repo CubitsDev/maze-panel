@@ -30,6 +30,12 @@ $cannotbeModified = array('4', '29', '62', '60', '7', '57', '9', '63', '53', '34
 
 $modAccessArea = array('4', '29', '62', '60', '7', '57', '9', '63');
 
+$adminAccessArea = array('4', '29', '62', '60', '7', '57');
+
+$seniorAccessArea = array('4', '29', '62', '60');
+
+$managementAccessArea = array('4', '29', '62');
+
 $noOneCanModify = array('4', '29', '62');
 
 $gameHost = "144.217.11.110";
