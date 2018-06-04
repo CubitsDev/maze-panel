@@ -1,4 +1,5 @@
 <?php
+/* User won't be banned via this route */
 require 'steamauth/steamauth.php';
 include ('steamauth/userInfo.php');
 
