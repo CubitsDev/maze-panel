@@ -30,8 +30,20 @@ $cannotbeModified = array('4', '29', '62', '60', '7', '57', '9', '63', '53', '34
 
 $modAccessArea = array('4', '29', '62', '60', '7', '57', '9', '63');
 
+$adminAccessArea = array('4', '29', '62', '60', '7', '57');
+
+$seniorAccessArea = array('4', '29', '62', '60');
+
+$managementAccessArea = array('4', '29', '62');
+
 $noOneCanModify = array('4', '29', '62');
 
-$header_path = "header_side.php";
+$gameHost = "144.217.11.110";
+
+$gameUser = "tom_remote";
+
+$gamePass = "5xka1kUiiovXFTOw";
+
+$gameDb = "santos_private";
 
  ?>
