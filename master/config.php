@@ -46,4 +46,11 @@ $gamePass = "5xka1kUiiovXFTOw";
 
 $gameDb = "santos_private";
 
+$gameConn = new mysqli($gameHost, $gameUser, $gamePass, $gameDb);
+
+if ($gameConn->connect_error) {
+    die("Connection failed: " . $gameConn->connect_error);
+}
+
+
  ?>

@@ -145,6 +145,16 @@ header("location: welcome.php");
                            <li><a href="moderator_lookup.php">Player Lookup</a></li>
                        </ul>
                    </li>
+
+                   <li class="sub-menu">
+                       <a href="javascript:;" >
+                           <i class="fa fa-ravelry"></i>
+                           <span>Senior Admin Area</span>
+                       </a>
+                       <ul class="sub">
+                           <li><a href="sa_compensate.php">Player Compensate</a></li>
+                       </ul>
+                   </li>
                </ul>
                <!-- sidebar menu end-->
            </div>
