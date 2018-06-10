@@ -202,7 +202,7 @@ if(isset($_GET["successful"])) {
                 <?php  }
                  if ($successShow == "1") { ?>
                 <div class="alert alert-success" role="alert">
-                  User Requested Is: <?php echo $_SESSION['modLookupResult']; ?>
+                  User Requested Is: <?php echo $_SESSION['modLookupResult']; echo " "; echo $_SESSION['modLookupResult1']; ?>
                 </div>
             <?php
           } $_SESSION['modLookupResult'] = "";
@@ -234,15 +234,17 @@ if(isset($_GET["successful"])) {
                   </div>
                   <div class="form-panel">
                   	  <h4 class="mb"><i class="fa fa-angle-right"></i> Identify User Via RP Name</h4>
-                      <form class="form-horizontal style-form" method="get">
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Server Roleplay Name</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" placeholder="Server RP Name" name="id" required disabled>
-                              </div>
-                          </div>
-                          <button type="submit" class="btn btn-theme">Unavailable</button>
-                      </form>
+                        <form class="form-inline" method="get" action="moderator_lookup_name.php">
+                        <div class="form-group">
+                            <label class="sr-only">Frst Name</label>
+                            <input type="text" class="form-control" name="firstname" placeholder="Bernie">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only">Last Name</label>
+                            <input type="text" class="form-control" name="lastname" placeholder="Sanders">
+                        </div>
+                        <button type="submit" class="btn btn-theme">Submit</button>
+                    </form>
                   </div>
           		</div><!-- col-lg-12-->
         <?php    } else {

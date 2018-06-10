@@ -39,15 +39,27 @@ if ($accepted == false) {
 header("location: welcome.php");
 }
 
-if (isset($_GET["id"]))
+if (isset($_GET["firstname"]))
 {
-    $identity = $_GET["id"];
+    $fname = $_GET["firstname"];
 
 } else {
 
   header("location: moderator_lookup.php?invalidID=1");
 
 }
+
+if (isset($_GET["lastname"]))
+{
+    $lname = $_GET["lastname"];
+
+} else {
+
+  header("location: moderator_lookup.php?invalidID=1");
+
+}
+
+$userExecute = htmlspecialchars($_SESSION['username']);
 
 function A2S($id) {
     if (preg_match('/^STEAM_/', $id)) {
@@ -60,21 +72,30 @@ function A2S($id) {
     }
 }
 
-$userExecute = htmlspecialchars($_SESSION['username']);
-
-$userSteamID = A2S($identity);
-
-$sqlQuery = "SELECT name FROM core_members WHERE steamid = ".$userSteamID."";
-$resultQuery = mysqli_query($conn, $sqlQuery);
-$sqlRow = mysqli_fetch_array($resultQuery);
-
-$sqlQuery1 = "SELECT member_id FROM core_members WHERE steamid = ".$userSteamID."";
-$resultQuery1 = mysqli_query($conn, $sqlQuery1);
+// Intial Lookup from Player Name
+$sqlQuery1 = "SELECT player_id FROM characters WHERE first_name = '".$fname."' AND last_name = '".$lname."';";
+$resultQuery1 = mysqli_query($gameConn, $sqlQuery1);
 $sqlRow1 = mysqli_fetch_array($resultQuery1);
 
+$playersID = $sqlRow1['player_id'];
+
+
+//Looking for SteamID
+$sqlQuery2 = "SELECT steamid FROM players WHERE id = '".$playersID."';";
+$resultQuery2 = mysqli_query($gameConn, $sqlQuery2);
+$sqlRow2 = mysqli_fetch_array($resultQuery2);
+
+$steamID32 = $sqlRow2['steamid'];
+
+$steamID64 = A2S($steamID32);
+
+$sqlQuery3 = "SELECT member_id FROM core_members WHERE steamid = ".$steamID64.";";
+$resultQuery3 = mysqli_query($conn, $sqlQuery3);
+$sqlRow3 = mysqli_fetch_array($resultQuery3);
+
 session_start();
-$_SESSION['modLookupResult'] = $sqlRow['name'];
-$_SESSION['modLookupResult1'] = $sqlRow1['member_id'];
+$_SESSION['modLookupResult'] = $sqlRow3['member_id'];
+$_SESSION['modLookupResult1'] = $steamID32;
 header("location: moderator_lookup.php?successful=1");
 
 ?>
