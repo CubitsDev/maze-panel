@@ -286,12 +286,55 @@ if(isset($_GET["successful"])) {
                                   						</select>
                                               <input name="id" type="hidden" value="<?php echo $identity; ?>">
                                               <br>
-                                              <button type="submit" class="btn btn-theme" style="float: right;">Submit</button
+                                              <button type="submit" class="btn btn-theme" style="float: right;">Submit</button>
                                              </div>
-                                          </div>
-                                       </form>
                                      </div>
+                                     </form>
                                    </div>
+                                   	  <div class="form-panel">
+                                        <h4 class="mb"><i class="fa fa-angle-right"></i> Update User's Secondary Groups</h4>
+                                        <form class="form-horizontal style-form" method="post" action="user_forums_secondary.php">
+                                            <div class="form-group">
+                                              <label class="col-sm-2 col-sm-2 control-label"> User's Secondary Groups</label>
+                                              <div class="col-sm-10">
+                                                <select name="schange2[]" class="form-control" multiple>
+                                                  <?php
+                                                    $sql23 = "SELECT g_id FROM core_groups;";
+
+                                                        $rs = mysqli_query($conn, $sql23);
+
+                                                        while($row23 = mysqli_fetch_array($rs))
+                                                        {
+                                                          $gid = "core_group_".$row23['g_id']."";
+                                                          $sql24 = "SELECT word_default FROM core_sys_lang_words WHERE word_key LIKE 'core_group_".$row23['g_id']."';";
+
+                                                          $rs2 = mysqli_query($conn, $sql24);
+
+                                                          while($row24 = mysqli_fetch_array($rs2))
+                                                          {
+                                                            $sql25 = "SELECT mgroup_others FROM core_members WHERE member_id = ".$identity.";";
+                                                            $result25 = mysqli_query($conn, $sql25);
+                                                            $row25 = mysqli_fetch_array($result25);
+                                                            $allSecondary = $row25['mgroup_others'];
+                                                            $secondarys = explode(",", $allSecondary);
+
+                                                            if (in_array($row23['g_id'], $secondarys)) {
+                                                              echo "<option value=\"".$row23['g_id']."\" selected>".$row24['word_default']."</option>\n  ";
+                                                            } else {
+                                                              echo "<option value=\"".$row23['g_id']."\">".$row24['word_default']."</option>\n  ";
+                                                            }
+
+                                                          }
+                                                        }
+                                                    ?>
+                                                </select>
+                                                <input name="id" type="hidden" value="<?php echo $identity; ?>">
+                                                <br>
+                                                <button type="submit" class="btn btn-theme" style="float: right;" tabindex="2">Submit</button>
+                                               </div>
+                                       </div>
+                                       </form>
+                                    </div>
                           <?php  }  ?>
 
                           <?php } ?>
