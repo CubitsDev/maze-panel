@@ -63,15 +63,13 @@ if (isset($_GET["cash"]))
 
 }
 
-if (ctype_digit($cashAmount)) {
-  if ($row['member_group_id'] == 60) {
+if ($row['member_group_id'] == 60) {
     if ($cashAmount > 25000) {
       header("location: sa_compensate.php?tooMuch=1");
+      exit;
     }
-  }
-} else {
-   header("location: sa_compensate.php?cashNotNumber=1");
 }
+
 
 if (isset($_GET["reason"]))
 {
