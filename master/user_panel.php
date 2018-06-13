@@ -155,6 +155,15 @@ header("location: welcome.php");
                            <li><a href="sa_compensate.php">Player Compensate</a></li>
                        </ul>
                    </li>
+                   <li class="sub-menu">
+                       <a href="javascript:;" >
+                           <i class="fa fa-grav"></i>
+                           <span>Panel</span>
+                       </a>
+                       <ul class="sub">
+                           <li><a href="panel_logs.php">Full Logs</a></li>
+                       </ul>
+                   </li>
                </ul>
                <!-- sidebar menu end-->
            </div>

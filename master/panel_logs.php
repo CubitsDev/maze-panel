@@ -39,32 +39,8 @@ if ($accepted == false) {
 header("location: welcome.php");
 }
 
-if (isset($_GET["id"]))
-{
-    $identity = $_GET["id"];
-} else {
-  $identity = "0";
-}
-
-if(isset($_GET["invalidID"])) {
-  $invalidIDShow = $_GET["invalidID"];
-} else {
-  $invalidIDShow = "0";
-}
-
-if(isset($_GET["noPermission"])) {
-  $noPermissionShow = $_GET["noPermission"];
-} else {
-  $noPermissionShow = "0";
-}
-
-if(isset($_GET["successful"])) {
-  $successShow = $_GET["successful"];
-} else {
-  $successShow = "0";
-}
-
  ?>
+
  <!DOCTYPE html>
  <html lang="en">
    <head>
@@ -82,6 +58,7 @@ if(isset($_GET["successful"])) {
      <!-- Custom styles for this template -->
      <link href="https://mazerp.com/panel/assets/css/layout.css" rel="stylesheet">
      <link href="https://mazerp.com/panel/assets/css/style-responsive.css" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
 
      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
      <!--[if lt IE 9]>
@@ -97,7 +74,7 @@ if(isset($_GET["successful"])) {
        TOP BAR CONTENT & NOTIFICATIONS
        *********************************************************************************************************************************************************** -->
        <!--header start-->
-       <header class="header black-bg" style="background: #27292a;border-bottom: 1px solid #a94442;">
+       <header class="header black-bg">
                <div class="sidebar-toggle-box">
                    <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
                </div>
@@ -112,7 +89,7 @@ if(isset($_GET["successful"])) {
              </div>
              <div class="top-menu">
                <ul class="nav pull-right top-menu">
-                     <li><a href="logout.php" style="	color: #f2f2f2;font-size: 12px;border-radius: 4px;-webkit-border-radius: 4px;border: 1px solid #ffffff !important;padding: 5px 15px;margin-right: 15px;margin-top: 15px;">Logout</a></li>
+                     <li><a class="logout" href="logout.php">Logout</a></li>
              	</ul>
              </div>
          </header>
@@ -150,12 +127,12 @@ if(isset($_GET["successful"])) {
                    </li>
 
                    <li class="sub-menu">
-                       <a class="active" href="javascript:;" >
+                       <a href="javascript:;" >
                            <i class="fa fa-life-ring"></i>
                            <span>Support Area</span>
                        </a>
                        <ul class="sub">
-                           <li class="active"><a href="support_make_civ.php">Make Civ</a></li>
+                           <li><a href="support_make_civ.php">Make Civ</a></li>
                            <li><a href="support_name_change.php">Name Change</a></li>
                        </ul>
                    </li>
@@ -200,44 +177,37 @@ if(isset($_GET["successful"])) {
        <!--main content start-->
        <section id="main-content">
            <section class="wrapper site-min-height">
-           	<h3><i class="fa fa-angle-right"></i> Make Civ</h3>
+           	<h3><i class="fa fa-angle-right"></i> Panel Users</h3>
            	<div class="row mt">
-              <?php
-                  if ($invalidIDShow == "1") { ?>
-                    <div class="alert alert-danger" role="alert">
-                      Forum ID Was Invalid!
-                    </div>
-                <?php  }
-                if ($noPermissionShow == "1") { ?>
-                  <div class="alert alert-danger" role="alert">
-                    You do not have Permission to edit this user!
-                  </div>
-              <?php  } if ($successShow == "1") { ?>
-                <div class="alert alert-success" role="alert">
-                  Successfully made User a Civilian!
-                </div>
-            <?php  }
-             ?>
-          		<div class="col-lg-12">
-                  <div class="form-panel">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Make Civilian</h4>
-                      <form class="form-horizontal style-form" method="get" action="https://mazerp.com/panel/support_make_civ_action.php">
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">User ID</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" placeholder="User ID" name="id" required>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Application URL</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" placeholder="Application URL" name="url" required>
-                              </div>
-                          </div>
-                          <button type="submit" class="btn btn-theme">Submit</button>
-                      </form>
-                  </div>
-          		</div><!-- col-lg-12-->
+              <div class="col-md-12 mt">
+                <div class="content-panel">
+                      <table class="table table-hover" id="logs">
+                      <h4><i class="fa fa-angle-right"></i> Panel Logs</h4>
+                      <hr>
+                          <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Log</th>
+                            <th>URL</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <?php
+                          $sql7 = "SELECT * FROM panel_logs ORDER BY idpanel_logs;";
+                          $query = mysqli_query($conn, $sql7);
+
+                          while ($row9 = mysqli_fetch_array($query)) {
+                            echo "<tr>";
+                            echo "<td>".$row9['idpanel_logs']."</td>";
+                            echo "<td>".$row9['entry']."</td>";
+                            if (is_null($row9['url'])) {
+                              echo "<td>N/A</td>";
+                            } else {
+                            echo "<td><a href='".$row9['url']."'>Link</a></td>";
+                          } }
+                           ?>
+                          </tbody>
+                      </table>
                   </div><!--/content-panel -->
               </div><!-- /col-md-12 -->
            	</div>
@@ -270,6 +240,8 @@ if(isset($_GET["successful"])) {
 
      <!--common script for all pages-->
      <script src="https://mazerp.com/panel/assets/js/common-scripts.js"></script>
+     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 
      <!--script for this page-->
 
@@ -277,7 +249,22 @@ if(isset($_GET["successful"])) {
      setTimeout(function(){
         window.location.href = 'timed_out.php';
      }, 300000);
+
+     $(document).ready(function() {
+    $('#logs').DataTable( {
+        order: [[ 0, 'desc' ]]
+    } );
+} );
   </script>
 
+
+<style>
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  display: inherit;
+  padding: 0;
+}
+
+</style>
    </body>
  </html>
