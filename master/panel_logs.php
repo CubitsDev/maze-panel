@@ -154,6 +154,7 @@ header("location: welcome.php");
                        </a>
                        <ul class="sub">
                            <li><a href="sa_compensate.php">Player Compensate</a></li>
+<li><a href="sa_server_logs.php">Server Logs</a></li>
                        </ul>
                    </li>
                    <li class="sub-menu">

@@ -46,6 +46,13 @@ if (isset($_GET["id"]))
   $identity = "0";
 }
 
+if (isset($_GET["log"]))
+{
+  $logsFile = $_GET["log"];
+} else {
+  $logsFile = "0";
+}
+
 if(isset($_GET["invalidID"])) {
   $invalidIDShow = $_GET["invalidID"];
 } else {
@@ -82,6 +89,7 @@ if(isset($_GET["successful"])) {
      <!-- Custom styles for this template -->
      <link href="https://mazerp.com/panel/assets/css/layout.css" rel="stylesheet">
      <link href="https://mazerp.com/panel/assets/css/style-responsive.css" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
 
      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
      <!--[if lt IE 9]>
@@ -150,13 +158,13 @@ if(isset($_GET["successful"])) {
                    </li>
 
                    <li class="sub-menu">
-                       <a class="active" href="javascript:;" >
+                       <a href="javascript:;" >
                            <i class="fa fa-life-ring"></i>
                            <span>Support Area</span>
                        </a>
                        <ul class="sub">
                            <li><a href="support_make_civ.php">Make Civ</a></li>
-                           <li class="active"><a href="support_name_change.php">Name Change</a></li>
+                           <li><a href="support_name_change.php">Name Change</a></li>
                        </ul>
                    </li>
 
@@ -171,16 +179,15 @@ if(isset($_GET["successful"])) {
                    </li>
 
                    <li class="sub-menu">
-                       <a href="javascript:;" >
+                       <a class="active" href="javascript:;" >
                            <i class="fa fa-ravelry"></i>
                            <span>Senior Admin Area</span>
                        </a>
                        <ul class="sub">
                            <li><a href="sa_compensate.php">Player Compensate</a></li>
-<li><a href="sa_server_logs.php">Server Logs</a></li>
+                           <li class="active"><a href="sa_server_logs.php">Server Logs</a></li>
                        </ul>
                    </li>
-
                    <li class="sub-menu">
                        <a href="javascript:;" >
                            <i class="fa fa-grav"></i>
@@ -202,50 +209,81 @@ if(isset($_GET["successful"])) {
        <!--main content start-->
        <section id="main-content">
            <section class="wrapper site-min-height">
-           	<h3><i class="fa fa-angle-right"></i> Name Change</h3>
+           	<h3><i class="fa fa-angle-right"></i> Game Panel</h3>
            	<div class="row mt">
               <?php
                   if ($invalidIDShow == "1") { ?>
                     <div class="alert alert-danger" role="alert">
-                      Forum ID Was Invalid!
+                      Logs Table does not Exist!
                     </div>
                 <?php  }
-                if ($noPermissionShow == "1") { ?>
-                  <div class="alert alert-danger" role="alert">
-                    You do not have Permission to edit this user!
-                  </div>
-              <?php  } if ($successShow == "1") { ?>
-                <div class="alert alert-success" role="alert">
-                  Successfully Changed User''s Forum Name!
-                </div>
-            <?php  }
+            if (in_array($_SESSION['usergroup'], $seniorAccessArea) ) {
+              if ($logsFile == "0") {
              ?>
           		<div class="col-lg-12">
-                  <div class="form-panel">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Name Change (Civ Interview)</h4>
-                      <form class="form-horizontal style-form" method="get" action="https://mazerp.com/panel/support_name_change_action.php">
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">User ID</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" placeholder="User ID" name="id" required>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Application URL</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" placeholder="Application URL" name="url" required>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">New Name</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" placeholder="John Johnson" name="newname" required>
-                              </div>
-                          </div>
-                          <button type="submit" class="btn btn-theme">Submit</button>
-                      </form>
+                <?php
+
+                $sqlGameLogs = "SHOW TABLES;";
+                $queryGameLogs = mysqli_query($gameLogsConn, $sqlGameLogs);
+
+                if (!$queryGameLogs) {
+                  echo "DB Error, could not list tables\n";
+                  echo 'MySQL Error: ' . mysqli_error();
+
+                }
+
+                while ($rowlogs = mysqli_fetch_row($queryGameLogs)) { ?>
+                  <div class="col-md-4 col-sm-4 mb">
+                        		<div class="darkblue-panel pn">
+                        			<div class="darkblue-header">
+  						  			        <h5>Server Logs</h5>
+                        			</div>
+                        			<h1 class="mt"><i class="fa fa-user fa-3x"></i></h1>
+  								            <p><?php echo $rowlogs[0]; ?></p>
+  								                    <footer>
+  									                             <div class="centered">
+  										                           <a href="sa_server_logs.php?log=<?php echo $rowlogs[0]; ?>"><h5><i class="fa fa-file-text-o"></i> View Logs For This Date</h5></a>
+  									                             </div>
+  								                    </footer>
+                        	   </div>
                   </div>
+              <?php  } ?>
+
           		</div><!-- col-lg-12-->
+            <?php } else { ?>
+
+              <div class="col-md-12 mt">
+                <div class="content-panel">
+                      <table class="table table-hover" id="logs">
+                      <h4><i class="fa fa-angle-right"></i> Server Logs</h4>
+                      <hr>
+                          <thead>
+                          <tr>
+                            <th>Time</th>
+                            <th>Log</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <?php
+                          $sql9 = "SELECT * FROM ".$logsFile.";";
+                          $query3 = mysqli_query($gameLogsConn, $sql9);
+
+                          while ($row11 = mysqli_fetch_array($query3)) {
+                            echo "<tr>";
+                            echo "<td>".$row11['timeoflog']."</td>";
+                            echo "<td>".$row11['loginfo']."</td>";
+                          }
+                           ?>
+                          </tbody>
+                      </table>
+                  </div><!--/content-panel -->
+              </div><!-- /col-md-12 -->
+
+          <?php } } else { ?>
+              <div class="col-lg-12">
+                  <center><i class="fa fa-exclamation-triangle" aria-hidden="true" style="font-size: 32px;"></i><br><br>This is an Area for SA+ Only! If this is an error, please inform Tom!</center>
+          		</div><!-- col-lg-12-->
+            <?php } ?>
                   </div><!--/content-panel -->
               </div><!-- /col-md-12 -->
            	</div>
@@ -280,12 +318,29 @@ if(isset($_GET["successful"])) {
      <script src="https://mazerp.com/panel/assets/js/common-scripts.js"></script>
 
      <!--script for this page-->
+     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 
      <script>
      setTimeout(function(){
         window.location.href = 'timed_out.php';
      }, 300000);
+
+     $(document).ready(function() {
+    $('#logs').DataTable( {
+        order: [[ 0, 'desc' ]]
+    } );
+} );
   </script>
+
+  <style>
+
+  .dataTables_wrapper .dataTables_paginate .paginate_button {
+    display: inherit;
+    padding: 0;
+  }
+
+  </style>
 
    </body>
  </html>

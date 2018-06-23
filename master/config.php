@@ -52,5 +52,16 @@ if ($gameConn->connect_error) {
     die("Connection failed: " . $gameConn->connect_error);
 }
 
+$logHost = "144.217.11.110";
+$logUser = "logs_remote";
+$logPass = "FK6nG8hk3GYD5Dcq";
+$logsLocation = "santos_private_logs";
+
+$gameLogsConn = new mysqli($logHost, $logUser, $logPass, $logsLocation);
+
+
+if ($gameLogsConn->connect_error) {
+    die("Connection failed: " . $gameLogsConn->connect_error);
+}
 
  ?>
