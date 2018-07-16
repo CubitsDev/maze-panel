@@ -71,30 +71,11 @@ header("location: user_forums.php?noPermission=1");
 
 } else {
 
-  if ($group == "civ") {
+  if ($group == "0") {
 
-    $sqlciv = "UPDATE core_members SET member_group_id='12' WHERE member_id=".$identity.";";
+    echo "enter a fucking group";
 
-    if ($conn->query($sqlciv) === TRUE) {
-
-
-     $sqlLog = "INSERT INTO panel_logs VALUES (NULL, '".$userExecute." Set ".$identity." to Civilian', NULL);";
-
-        if ($conn->query($sqlLog) === TRUE) {
-          echo "successful";
-        header("location: user_forums.php?successful=1&id=".$identity."");
-
-        } else {
-
-          echo "Error updating record: " . $conn->error;
-
-        }
-
-    } else {
-
-    echo "Error updating record: " . $conn->error;
-    }
-  } elseif ($group == "pd") {
+  } else {
     $sqlciv = "UPDATE core_members SET member_group_id='13' WHERE member_id=".$identity.";";
 
     if ($conn->query($sqlciv) === TRUE) {
@@ -114,122 +95,30 @@ header("location: user_forums.php?noPermission=1");
 
     } else {
 
-    echo "Error updating record: " . $conn->error;
-    }
-  } elseif ($group == "fd") {
-    $sqlciv = "UPDATE core_members SET member_group_id='31' WHERE member_id=".$identity.";";
+      $sqlPrimary = "UPDATE core_members SET member_group_id='".$group."' WHERE member_id=".$identity.";";
 
-    if ($conn->query($sqlciv) === TRUE) {
+      if ($conn->query($sqlPrimary) === TRUE) {
 
 
-     $sqlLog = "INSERT INTO panel_logs VALUES (NULL, '".$userExecute." Set ".$identity." to FD', NULL);";
+       $sqlLog = "INSERT INTO panel_logs VALUES (NULL, '".$userExecute." Changed ".$identity." Primary Group to ".$str."', NULL);";
 
-        if ($conn->query($sqlLog) === TRUE) {
-          echo "successful";
-        header("location: user_forums.php?successful=1&id=".$identity."");
+          if ($conn->query($sqlLog) === TRUE) {
+            echo "successful";
+          header("location: user_forums.php?successful=1&id=".$identity."");
 
-        } else {
+          } else {
 
-          echo "Error updating record: " . $conn->error;
+            echo "Error updating record: " . $conn->error;
 
-        }
-
-    } else {
-
-    echo "Error updating record: " . $conn->error;
-    }
-
-} elseif ($group == "ems") {
-  $sqlciv = "UPDATE core_members SET member_group_id='14' WHERE member_id=".$identity.";";
-
-  if ($conn->query($sqlciv) === TRUE) {
-
-
-   $sqlLog = "INSERT INTO panel_logs VALUES (NULL, '".$userExecute." Set ".$identity." to EMS', NULL);";
-
-      if ($conn->query($sqlLog) === TRUE) {
-        echo "successful";
-      header("location: user_forums.php?successful=1&id=".$identity."");
+          }
 
       } else {
 
-        echo "Error updating record: " . $conn->error;
-
+      echo "Error updating record: " . $conn->error;
       }
 
-  } else {
-
-  echo "Error updating record: " . $conn->error;
-  }
-
-} elseif ($group == "ss") {
-  $sqlciv = "UPDATE core_members SET member_group_id='51' WHERE member_id=".$identity.";";
-
-  if ($conn->query($sqlciv) === TRUE) {
-
-
-   $sqlLog = "INSERT INTO panel_logs VALUES (NULL, '".$userExecute." Set ".$identity." to Secret Service', NULL);";
-
-      if ($conn->query($sqlLog) === TRUE) {
-        echo "successful";
-      header("location: user_forums.php?successful=1&id=".$identity."");
-
-      } else {
-
-        echo "Error updating record: " . $conn->error;
-
-      }
-
-  } else {
-
-  echo "Error updating record: " . $conn->error;
-  }
-
-} elseif ($group == "banned") {
-  $sqlciv = "UPDATE core_members SET member_group_id='20' WHERE member_id=".$identity.";";
-
-  if ($conn->query($sqlciv) === TRUE) {
-
-
-   $sqlLog = "INSERT INTO panel_logs VALUES (NULL, '".$userExecute." Banned ".$identity."', NULL);";
-
-      if ($conn->query($sqlLog) === TRUE) {
-        echo "successful";
-      header("location: user_forums.php?successful=1&id=".$identity."");
-
-      } else {
-
-        echo "Error updating record: " . $conn->error;
-
-      }
-
-  } else {
-
-  echo "Error updating record: " . $conn->error;
-  }
-
-} elseif ($group == "member") {
-  $sqlciv = "UPDATE core_members SET member_group_id='3' WHERE member_id=".$identity.";";
-
-  if ($conn->query($sqlciv) === TRUE) {
-
-
-   $sqlLog = "INSERT INTO panel_logs VALUES (NULL, '".$userExecute." Set ".$identity." to Member', NULL);";
-
-      if ($conn->query($sqlLog) === TRUE) {
-        echo "successful";
-      header("location: user_forums.php?successful=1&id=".$identity."");
-
-      } else {
-
-        echo "Error updating record: " . $conn->error;
-
-      }
-
-  } else {
-
-  echo "Error updating record: " . $conn->error;
-  }
 }
+
 }
+
  ?>

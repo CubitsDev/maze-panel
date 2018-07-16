@@ -168,6 +168,7 @@ if(isset($_GET["successful"])) {
                        </a>
                        <ul class="sub">
                            <li><a href="moderator_lookup.php">Player Lookup</a></li>
+<li><a href="moderator_name_change.php">Name Change</a></li>
                        </ul>
                    </li>
 
@@ -286,13 +287,34 @@ if(isset($_GET["successful"])) {
                                             <label class="col-sm-2 col-sm-2 control-label">Primary Group</label>
                                             <div class="col-sm-10">
                                               <select name="gchange"class="form-control">
-                                  						  <option value="civ">Civilian</option>
-                                  						  <option value="pd">Police Department</option>
-                                  						  <option value="ems">EMS</option>
-                                  						  <option value="fd">Fire Department</option>
-                                  						  <option value="ss">Secret Service</option>
-                                                <option value="banned">Banned</option>
-                                                <option value="member">Member</option>
+                                                <?php
+                                                  $sql23_primary = "SELECT g_id FROM core_groups;";
+
+                                                      $rs_primary = mysqli_query($conn, $sql23_primary);
+
+                                                      while($row23_primary = mysqli_fetch_array($rs_primary))
+                                                      {
+                                                        $gid_primary = "core_group_".$row23_primary['g_id']."";
+                                                        $sql24_primary = "SELECT word_default FROM core_sys_lang_words WHERE word_key LIKE 'core_group_".$row23_primary['g_id']."';";
+
+                                                        $rs2_primary = mysqli_query($conn, $sql24_primary);
+
+                                                        while($row24_primary = mysqli_fetch_array($rs2_primary))
+                                                        {
+                                                          $sql25_primary = "SELECT member_group_id FROM core_members WHERE member_id = ".$identity.";";
+                                                          $result25_primary = mysqli_query($conn, $sql25_primary);
+                                                          $row25_primary = mysqli_fetch_array($result25_primary);
+                                                          $primaryGroup = $row25_primary['member_group_id'];
+
+                                                          if ($row23_primary['g_id'] == $primaryGroup)) {
+                                                            echo "<option value=\"".$row23['g_id']."\" selected>".$row24['word_default']."</option>\n  ";
+                                                          } else {
+                                                            echo "<option value=\"".$row23['g_id']."\">".$row24['word_default']."</option>\n  ";
+                                                          }
+
+                                                        }
+                                                      }
+                                                  ?>
                                   						</select>
                                               <input name="id" type="hidden" value="<?php echo $identity; ?>">
                                               <br>

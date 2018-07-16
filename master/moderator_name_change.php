@@ -167,8 +167,8 @@ if(isset($_GET["successful"])) {
                            <span>Moderator Area</span>
                        </a>
                        <ul class="sub">
-                           <li class="active"><a href="moderator_lookup.php">Player Lookup</a></li>
-                           <li><a href="moderator_name_change.php">Name Change</a></li>
+                           <li><a href="moderator_lookup.php">Player Lookup</a></li>
+                           <li class="active"><a href="moderator_name_change.php">Name Change</a></li>
                        </ul>
                    </li>
 
@@ -203,7 +203,7 @@ if(isset($_GET["successful"])) {
        <!--main content start-->
        <section id="main-content">
            <section class="wrapper site-min-height">
-           	<h3><i class="fa fa-angle-right"></i> Player Identify</h3>
+           	<h3><i class="fa fa-angle-right"></i> Player Name Change</h3>
            	<div class="row mt">
               <?php
                   if ($invalidIDShow == "1") { ?>
@@ -218,46 +218,44 @@ if(isset($_GET["successful"])) {
             <?php
           } $_SESSION['modLookupResult'] = "";
           if (in_array($_SESSION['usergroup'], $modAccessArea) ) { ?>
-              <div class="col-lg-12">
-                  <div class="form-panel">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Identify User with Forum ID</h4>
-                      <form class="form-horizontal style-form" method="get" action="moderator_lookup_forum.php">
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Forum User ID</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" placeholder="User ID" name="id" required>
-                              </div>
-                          </div>
-                          <button type="submit" class="btn btn-theme">Submit</button>
-                      </form>
-                  </div>
-                  <div class="form-panel">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Identify User Via SteamID</h4>
-                      <form class="form-horizontal style-form" method="get" action="moderator_lookup_steam.php">
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Steam 32 ID</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" placeholder="Steam ID" name="id" required>
-                              </div>
-                          </div>
-                          <button type="submit" class="btn btn-theme">Submit</button>
-                      </form>
-                  </div>
-                  <div class="form-panel">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Identify User Via RP Name</h4>
-                        <form class="form-inline" method="get" action="moderator_lookup_name.php">
+            <div class="col-lg-12">
+                <div class="form-panel">
+                    <h4 class="mb"><i class="fa fa-angle-right"></i> Name Change</h4>
+                    <form class="form-horizontal style-form" method="get" action="moderator_name_change_action.php">
                         <div class="form-group">
-                            <label class="sr-only">Frst Name</label>
-                            <input type="text" class="form-control" name="firstname" placeholder="Bernie">
+                            <label class="col-sm-2 col-sm-2 control-label">User ID (Forum)</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="User ID" name="id" required>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label class="sr-only">Last Name</label>
-                            <input type="text" class="form-control" name="lastname" placeholder="Sanders">
+                            <label class="col-sm-2 col-sm-2 control-label">Name Change URL</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="Name Change URL" name="url" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">New Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="Bernie Sanders" name="newname" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Change In Game?</label>
+                            <div class="col-sm-6 text-center">
+                                  <div class="switch has-switch"><div class="switch-animate switch-on"><input type="checkbox" data-toggle="switch" name="gameChange" value="changeGame"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div></div>
+                              </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Charge $2500 In Game?</label>
+                            <div class="col-sm-6 text-center">
+                                  <div class="switch has-switch"><div class="switch-animate switch-on"><input type="checkbox" data-toggle="switch" name="playerCharge" value="chargeThem"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div></div>
+                              </div>
                         </div>
                         <button type="submit" class="btn btn-theme">Submit</button>
                     </form>
-                  </div>
-          		</div><!-- col-lg-12-->
+                </div>
+            </div><!-- col-lg-12-->
         <?php    } else {
              ?>
              <div class="col-lg-12">
