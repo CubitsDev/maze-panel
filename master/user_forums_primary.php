@@ -120,5 +120,6 @@ header("location: user_forums.php?noPermission=1");
 }
 
 }
+}
 
  ?>
