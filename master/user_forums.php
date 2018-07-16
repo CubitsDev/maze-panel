@@ -306,10 +306,10 @@ if(isset($_GET["successful"])) {
                                                           $row25_primary = mysqli_fetch_array($result25_primary);
                                                           $primaryGroup = $row25_primary['member_group_id'];
 
-                                                          if ($row23_primary['g_id'] == $primaryGroup)) {
-                                                            echo "<option value=\"".$row23['g_id']."\" selected>".$row24['word_default']."</option>\n  ";
+                                                          if ($row23_primary['g_id'] == $primaryGroup) {
+                                                            echo "<option value=\"".$row23_primary['g_id']."\" selected>".$row24_primary['word_default']."</option>\n  ";
                                                           } else {
-                                                            echo "<option value=\"".$row23['g_id']."\">".$row24['word_default']."</option>\n  ";
+                                                            echo "<option value=\"".$row23_primary['g_id']."\">".$row24_primary['word_default']."</option>\n  ";
                                                           }
 
                                                         }
