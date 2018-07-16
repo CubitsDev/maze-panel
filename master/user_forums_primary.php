@@ -76,24 +76,6 @@ header("location: user_forums.php?noPermission=1");
     echo "enter a fucking group";
 
   } else {
-    $sqlciv = "UPDATE core_members SET member_group_id='13' WHERE member_id=".$identity.";";
-
-    if ($conn->query($sqlciv) === TRUE) {
-
-
-     $sqlLog = "INSERT INTO panel_logs VALUES (NULL, '".$userExecute." Set ".$identity." to PD', NULL);";
-
-        if ($conn->query($sqlLog) === TRUE) {
-          echo "successful";
-        header("location: user_forums.php?successful=1&id=".$identity."");
-
-        } else {
-
-          echo "Error updating record: " . $conn->error;
-
-        }
-
-    } else {
 
       $sqlPrimary = "UPDATE core_members SET member_group_id='".$group."' WHERE member_id=".$identity.";";
 
@@ -120,6 +102,6 @@ header("location: user_forums.php?noPermission=1");
 }
 
 }
-}
+
 
  ?>
