@@ -213,7 +213,7 @@ if(isset($_GET["successful"])) {
                 <?php  }
                  if ($successShow == "1") { ?>
                 <div class="alert alert-success" role="alert">
-                  User Requested Is: <?php echo $_SESSION['modLookupResult']; echo " "; echo $_SESSION['modLookupResult1']; ?>
+                  User Name Changed to: <?php echo $_SESSION['modNameResult']; ?>
                 </div>
             <?php
           } $_SESSION['modLookupResult'] = "";
@@ -235,21 +235,27 @@ if(isset($_GET["successful"])) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label">New Name</label>
+                            <label class="col-sm-2 col-sm-2 control-label">New First Name</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" placeholder="Bernie Sanders" name="newname" required>
+                                <input type="text" class="form-control" placeholder="Bernie" name="newfirst" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">New Second Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="Sanders" name="newsecond" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">Change In Game?</label>
                             <div class="col-sm-6 text-center">
-                                  <div class="switch has-switch"><div class="switch-animate switch-on"><input type="checkbox" data-toggle="switch" name="gameChange" value="changeGame"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div></div>
+                                  <input type="checkbox" data-toggle="switch" name="gameChange" value="1">
                               </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">Charge $2500 In Game?</label>
                             <div class="col-sm-6 text-center">
-                                  <div class="switch has-switch"><div class="switch-animate switch-on"><input type="checkbox" data-toggle="switch" name="playerCharge" value="chargeThem"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div></div>
+                                  <input type="checkbox" data-toggle="switch" name="playerCharge" value="1">
                               </div>
                         </div>
                         <button type="submit" class="btn btn-theme">Submit</button>

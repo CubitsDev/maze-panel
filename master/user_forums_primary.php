@@ -82,7 +82,7 @@ header("location: user_forums.php?noPermission=1");
       if ($conn->query($sqlPrimary) === TRUE) {
 
 
-       $sqlLog = "INSERT INTO panel_logs VALUES (NULL, '".$userExecute." Changed ".$identity." Primary Group to ".$str."', NULL);";
+       $sqlLog = "INSERT INTO panel_logs VALUES (NULL, '".$userExecute." Changed ".$identity." Primary Group to ".$group."', NULL);";
 
           if ($conn->query($sqlLog) === TRUE) {
             echo "successful";

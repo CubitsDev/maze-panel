@@ -145,6 +145,7 @@ header("location: welcome.php");
                        <ul class="sub">
                            <li><a href="moderator_lookup.php">Player Lookup</a></li>
 <li><a href="moderator_name_change.php">Name Change</a></li>
+<li><a href="moderator_name_change.php">Name Change</a></li>
                        </ul>
                    </li>
 
