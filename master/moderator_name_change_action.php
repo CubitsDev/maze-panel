@@ -81,7 +81,7 @@ $insertUrl = $conn->real_escape_string($url);
 
 
 if ($identity == "0") {
-  header("location: support_name_change.php?invalidID=1");
+  header("location: moderator_name_change.php?invalidID=1");
 }
 
 function toSteamID($id) {
@@ -109,9 +109,9 @@ header("location: moderator_name_change.php?noPermission=1");
 
 } else {
 
-    $forumName = $newFirst + " " + $newSecond;
+    $forumName = "".$newFirst." ".$newSecond."";
 
-    $sqlForumChange = "UPDATE core_members SET name='".$forumName."' WHERE member_id=".$identity.";";
+    $sqlForumChange = "UPDATE core_members SET name='".$newFirst." ".$newSecond."' WHERE member_id=".$identity.";";
 
     if ($conn->query($sqlForumChange) === TRUE) {
 
