@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "***REMOVED***";
-$password = "***REMOVED***";
-$dbname = "santosforum";
+$servername = "";
+$username = "";
+$password = "";
+$dbname = "";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -38,13 +38,13 @@ $managementAccessArea = array('4', '29', '62');
 
 $noOneCanModify = array('4', '29', '62');
 
-$gameHost = "144.217.11.110";
+$gameHost = "";
 
-$gameUser = "tom_remote";
+$gameUser = "";
 
-$gamePass = "5xka1kUiiovXFTOw";
+$gamePass = "";
 
-$gameDb = "santos_private";
+$gameDb = "";
 
 $gameConn = new mysqli($gameHost, $gameUser, $gamePass, $gameDb);
 
@@ -52,10 +52,10 @@ if ($gameConn->connect_error) {
     die("Connection failed: " . $gameConn->connect_error);
 }
 
-$logHost = "144.217.11.110";
-$logUser = "logs_remote";
-$logPass = "FK6nG8hk3GYD5Dcq";
-$logsLocation = "santos_private_logs";
+$logHost = "";
+$logUser = "";
+$logPass = "";
+$logsLocation = "";
 
 $gameLogsConn = new mysqli($logHost, $logUser, $logPass, $logsLocation);
 
