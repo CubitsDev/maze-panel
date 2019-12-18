@@ -79,8 +79,8 @@ include ('../config.php');
 //echo ('Main screen turn on!<br/><br/>');
 
 $provider = new \Wohali\OAuth2\Client\Provider\Discord([
-    'clientId' => '***REMOVED***',
-    'clientSecret' => '***REMOVED***',
+    'clientId' => '',
+    'clientSecret' => '',
     'redirectUri' => 'https://mazerp.com/panel/discord/'
 ]);
 

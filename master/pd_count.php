@@ -3,8 +3,8 @@
 header("Access-Control-Allow-Origin: *");
 
 $servername = "localhost";
-$username = "***REMOVED***";
-$password = "***REMOVED***";
+$username = "shibe";
+$password = "fhAYfM8Dn1Qjz5ubQIcW";
 $dbname = "santosforum";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
